@@ -1,3 +1,6 @@
-import { sayHello } from 'xuyu'
+await import('xuyu/global')
 
-sayHello()
+const colorText = chalk`Hello {red xuyu}`
+echo(colorText)
+
+await $`echo "Hello xuyu"`
