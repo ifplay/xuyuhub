@@ -1,0 +1,15 @@
+lockfileVersion: 5.4
+
+importers:
+
+  .:
+    specifiers: {}
+
+  examples/app:
+    specifiers:
+      xuyu: workspace:*
+    dependencies:
+      xuyu: link:../../packages/xuyu
+
+  packages/xuyu:
+    specifiers: {}
