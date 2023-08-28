@@ -21,7 +21,10 @@ import {
   posixPath,
   select,
 } from 'xuyu'
-const configDir = home('.tp')
+import { createRequire } from 'module'
+
+const CONFIG_DIR_NAME = '.xyftp'
+const configDir = home(CONFIG_DIR_NAME)
 const configFile = home(configDir, 'config.json')
 await ensureConfig(configFile)
 const config = await readJson(configFile)
@@ -29,6 +32,8 @@ const config = await readJson(configFile)
 main()
 
 async function main() {
+  await help()
+
   const { sshConfig, localFile, remoteDir } = await useConfig()
 
   const { client, ftp } = await useFtp(sshConfig)
@@ -57,14 +62,14 @@ async function ensureConfig(cfgFile) {
       {
         ftp: {
           ssh: {
-            host: '192.168.4.211',
+            host: '192.168.30.24',
             port: 21,
-            username: 'wangzhen@whayer.cn',
+            username: 'test@xxx.com',
             desc: 'FTP',
           },
-          mengxi: {
-            dir: '/version/Software/Products/SISS-10000/SISS-10000.LX2 2.5.0.X（蒙西辅控巡视系统项目）/',
-            sub: 'Roll1/补丁',
+          test: {
+            dir: '/main/dir/path',
+            sub: 'sub/dir/path',
           },
         },
       },
@@ -96,7 +101,7 @@ function getBakFile(file) {
 async function useConfig() {
   const { _: files, ss } = argv
   if (files.length === 0) {
-    console.log('需要传入待上传文件: tp file\n')
+    console.log('需要传入待上传文件: xyftp file\n')
     process.exit(1)
   }
 
@@ -308,4 +313,13 @@ function tip(text) {
 
 function isEmpty(value) {
   return !value || !String(value).trim()
+}
+
+async function help() {
+  if (argv.v || argv.version) {
+    const require = createRequire(import.meta.url)
+    const p = require('./package.json')
+    console.log(p.version)
+    process.exit(0)
+  }
 }
