@@ -1,9 +1,26 @@
 #! /usr/bin/env node
 
 /**
- * Teleport
+ * xyftp
  */
-await import('xuyu/global')
+import {
+  argv,
+  ask,
+  askNumber,
+  home,
+  ensureJson,
+  outputJson,
+  readJson,
+  useFtp,
+  copy,
+  jenv,
+  pathExists,
+  pureFilename,
+  filenameSafeSj,
+  extname,
+  posixPath,
+  select,
+} from 'xuyu'
 const configDir = home('.tp')
 const configFile = home(configDir, 'config.json')
 await ensureConfig(configFile)
