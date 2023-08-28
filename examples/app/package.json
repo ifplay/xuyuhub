@@ -5,12 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "xuyu": "xuyu"
+    "xuyu": "xuyu",
+    "zftp": "zftp"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "xuyu": "workspace:*"
+    "xuyu": "workspace:*",
+    "zftp": "workspace:^0.0.1"
   }
 }
