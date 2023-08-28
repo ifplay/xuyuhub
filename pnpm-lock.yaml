@@ -8,10 +8,10 @@ importers:
   examples/app:
     specifiers:
       xuyu: workspace:*
-      zftp: workspace:^0.0.1
+      xyftp: workspace:^0.0.1
     dependencies:
       xuyu: link:../../packages/xuyu
-      zftp: link:../../packages/zftp
+      xyftp: link:../../packages/xyftp
 
   packages/xuyu:
     specifiers:
@@ -73,7 +73,7 @@ importers:
       trash: 8.1.1
       zx: 7.2.3
 
-  packages/zftp:
+  packages/xyftp:
     specifiers:
       xuyu: workspace:^0.0.2
     dependencies:

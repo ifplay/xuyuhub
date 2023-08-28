@@ -1,11 +1,11 @@
 {
-  "name": "zftp",
+  "name": "xyftp",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "zftp": "./index.js"
+    "xyftp": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
