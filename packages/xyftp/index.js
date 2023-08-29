@@ -59,20 +59,7 @@ async function ensureConfig(cfgFile) {
   if (!exist) {
     await ensureJson(
       cfgFile,
-      {
-        ftp: {
-          ssh: {
-            host: '192.168.30.24',
-            port: 21,
-            username: 'test@xxx.com',
-            desc: 'FTP',
-          },
-          test: {
-            dir: '/main/dir/path',
-            sub: 'sub/dir/path',
-          },
-        },
-      },
+      {},
       {
         spaces: 2,
       }
