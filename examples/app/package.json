@@ -13,6 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "xuyu": "workspace:*",
-    "xyftp": "workspace:^0.0.1"
+    "xyftp": "workspace:*"
   }
 }

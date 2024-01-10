@@ -8,7 +8,7 @@ importers:
   examples/app:
     specifiers:
       xuyu: workspace:*
-      xyftp: workspace:^0.0.1
+      xyftp: workspace:*
     dependencies:
       xuyu: link:../../packages/xuyu
       xyftp: link:../../packages/xyftp
