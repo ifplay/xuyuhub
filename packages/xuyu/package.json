@@ -1,6 +1,6 @@
 {
   "name": "xuyu",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -28,7 +28,6 @@
     "handlebars": "4.7.7",
     "inquirer": "9.2.7",
     "lodash": "4.17.21",
-    "lowdb": "6.0.1",
     "marked": "4.3.0",
     "marked-forms": "5.0.2",
     "node-notifier": "10.0.1",
