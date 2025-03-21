@@ -1,14 +1,18 @@
 {
 	"name": "obsidian-quick-input",
 	"version": "1.0.0",
-	"description": "Obsidian Quick Input Plugin",
+	"description": "An Obsidian plugin for quick wikilink and text shortcuts",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
-	"keywords": [],
+	"keywords": [
+		"obsidian",
+		"plugin",
+		"shortcuts"
+	],
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
@@ -20,10 +24,5 @@
 		"obsidian": "latest",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
-	},
-	"dependencies": {
-		"fuse.js": "^7.1.0",
-		"pinyin": "^4.0.0-alpha.2",
-		"segmentit": "^2.0.3"
 	}
 }

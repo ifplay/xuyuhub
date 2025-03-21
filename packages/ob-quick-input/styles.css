@@ -1,71 +1,121 @@
-/*
+/* Text Shortcuts Plugin Styles */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
-.obsidian-demo-container {
-  display: flex;
-  place-content: space-between;
-  align-items: center;
+.text-shortcuts-container {
+  padding: 16px;
+  height: 100%;
 }
 
-.obsidian-demo-container .left {
+.text-shortcuts-list {
+  height: calc(100% - 330px);
+}
+
+.text-shortcuts-header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 8px;
+}
+
+.text-shortcuts-subheading {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 12px 0 8px;
+  color: var(--text-muted);
+}
+
+.text-shortcuts-items {
+  height: calc(100% - 30px);
+  overflow-y: auto;
+}
+
+.text-shortcuts-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  background-color: var(--background-secondary);
+  position: relative;
+}
+
+.text-shortcuts-item:hover {
+  background-color: var(--background-secondary-alt);
+}
+
+.text-shortcuts-number {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--background-modifier-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
   margin-right: 8px;
 }
 
-.obsidian-demo-container .right {
-  border-top: solid var(--background-secondary) 1px;
-  padding: 10px;
+.text-shortcuts-text {
+  flex-grow: 1;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+.text-shortcuts-delete {
+  opacity: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.text-shortcuts-item:hover .text-shortcuts-delete {
+  opacity: 1;
+}
+
+.text-shortcuts-delete:hover {
+  color: var(--text-error);
+}
+
+.text-shortcuts-textarea {
+  width: 100%;
+  height: 100px;
+  background-color: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+
+.text-shortcuts-button-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  overflow: hidden;
+  justify-content: flex-end;
 }
 
-.obsidian-demo-container .right:hover {
-  color: orange;
-  background: gainsboro;
+.text-shortcuts-add-button {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.obsidian-demo-container .right:active {
-  transform: scale(0.95);
+.text-shortcuts-add-button:hover {
+  background-color: var(--interactive-accent-hover);
 }
 
-/* 快捷文本面板样式 */
-.quick-text-header {
-  padding: 10px;
+.text-shortcuts-help {
+  margin-bottom: 20px;
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.quick-text-list {
-  padding: 10px;
-}
-
-.quick-text-item {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  margin: 4px 0;
-  border-radius: 4px;
-  background-color: var(--background-primary);
-}
-
-.quick-text-item:hover {
-  background-color: var(--background-secondary);
-}
-
-.quick-text-item button {
-  margin-left: auto;
-  padding: 4px 8px;
-  border: none;
-  background-color: var(--interactive-accent);
-  color: white;
-  border-radius: 3px;
-  cursor: pointer;
+.text-shortcuts-help-text {
+  font-size: 12px;
+  color: var(--text-muted);
 }
 
 /* 在链接的又有两边添加微量的间距 */
