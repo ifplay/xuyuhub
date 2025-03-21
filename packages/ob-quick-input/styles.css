@@ -1,0 +1,89 @@
+/*
+
+This CSS file will be included with your plugin, and
+available in the app when your plugin is enabled.
+
+If your plugin does not need CSS, delete this file.
+
+*/
+.obsidian-demo-container {
+  display: flex;
+  place-content: space-between;
+  align-items: center;
+}
+
+.obsidian-demo-container .left {
+  margin-right: 8px;
+}
+
+.obsidian-demo-container .right {
+  border-top: solid var(--background-secondary) 1px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.obsidian-demo-container .right:hover {
+  color: orange;
+  background: gainsboro;
+}
+
+.obsidian-demo-container .right:active {
+  transform: scale(0.95);
+}
+
+/* 快捷文本面板样式 */
+.quick-text-header {
+  padding: 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.quick-text-list {
+  padding: 10px;
+}
+
+.quick-text-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+  background-color: var(--background-primary);
+}
+
+.quick-text-item:hover {
+  background-color: var(--background-secondary);
+}
+
+.quick-text-item button {
+  margin-left: auto;
+  padding: 4px 8px;
+  border: none;
+  background-color: var(--interactive-accent);
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* 在链接的又有两边添加微量的间距 */
+.cm-hmd-internal-link>.cm-underline::before,
+.cm-hmd-internal-link>.cm-underline::after {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.cm-formatting-link-start {
+  padding-left: 2px;
+}
+
+.cm-formatting-link-end {
+  padding-right: 2px;
+}
+
+/* 行首链接 */
+/* .cm-line>.cm-hmd-internal-link:not(.cm-hmd-internal-link ~ .cm-hmd-internal-link)>.cm-underline {
+  margin-left: 0;
+} */

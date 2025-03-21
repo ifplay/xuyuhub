@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "pnpm --filter ./packages/* test"
+    "test": "pnpm --filter ./packages/* test",
+    "obi": "pnpm i --filter 'ob*'"
   },
   "keywords": [],
   "author": "",

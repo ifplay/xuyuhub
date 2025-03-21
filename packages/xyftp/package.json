@@ -14,6 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "xuyu": "workspace:^0.0.2"
+    "xuyu": "workspace:*"
   }
 }

@@ -1,0 +1,10 @@
+{
+	"id": "quick-input",
+	"name": "快链文本",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "快速输入双链以及文本",
+	"author": "Obsidian",
+	"authorUrl": "https://github.com/ifplay",
+	"isDesktopOnly": true
+}
