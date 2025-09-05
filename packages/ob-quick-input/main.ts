@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js';
 import pinyin from "pinyin";
-import { App, Editor, EditorPosition, EditorSuggest, EditorSuggestContext, EditorSuggestTriggerInfo, MarkdownView, Notice, Plugin, PluginSettingTab, Setting, TFile, getLinkpath, parseLinktext, setIcon, WorkspaceLeaf, ItemView } from 'obsidian';
+import { App, Editor, EditorPosition, EditorSuggest, EditorSuggestContext, EditorSuggestTriggerInfo, MarkdownView, Notice, Plugin, PluginSettingTab, Setting, TFile, getLinkpath, parseLinktext, setIcon, WorkspaceLeaf, ItemView, Modifier } from 'obsidian';
 import { QuickTextView, QUICK_TEXT_VIEW } from "./quickTextView";
 
 
@@ -12,6 +12,7 @@ interface ObsidianDemoPluginSettings {
   rolePrefix: string;
   allPrefix: string;
   alwaysShowFileName: boolean;
+  shortcutWiki: boolean;
   shortcuts: TextShortcut[];
 }
 
@@ -20,6 +21,7 @@ const DEFAULT_SETTINGS: ObsidianDemoPluginSettings = {
   rolePrefix: '@',
   allPrefix: '==',
   alwaysShowFileName: false,
+  shortcutWiki: false,
   shortcuts: [
     { id: '1', text: '张三' },
     { id: '2', text: '李四' },
@@ -49,7 +51,7 @@ export default class ObsidianDemoPlugin extends Plugin {
     // Add command for showing the shortcuts panel
     this.addCommand({
       id: 'show-quick-text-shortcuts',
-      name: 'Show Text Shortcuts Panel 显示快捷文本面板',
+      name: 'Show Quick Input Panel 显示快捷文本面板',
       callback: () => {
         this.activateView();
       },
@@ -92,10 +94,16 @@ export default class ObsidianDemoPlugin extends Plugin {
 
     // Add commands for each shortcut
     this.settings.shortcuts.forEach((shortcut, index) => {
+      let modifiers: Modifier[] = ['Alt'];
+      let key = `${(index + 1) % 10}`;
+      if (index >= 10 && index <= 19) {
+        modifiers.push('Ctrl')
+      }
+
       this.addCommand({
-        id: `insert-shortcut-${index + 1}`,
-        name: `Insert Shortcut ${index + 1}: ${shortcut.text.substring(0, 20)}${shortcut.text.length > 20 ? '...' : ''}`,
-        hotkeys: [{ modifiers: ['Alt'], key: `${index + 1}` }],
+        id: `quick-input-${index + 1}`,
+        name: `Quick Input ${index + 1}: ${shortcut.text.substring(0, 20)}${shortcut.text.length > 20 ? '...' : ''}`,
+        hotkeys: index >= 20 ? [] : [{ modifiers, key }],
         editorCallback: (editor: Editor) => {
           this.insertShortcutText(editor, shortcut.text);
         },
@@ -103,7 +111,10 @@ export default class ObsidianDemoPlugin extends Plugin {
     });
   }
 
-  private insertShortcutText(editor: Editor, text: string) {
+  public insertShortcutText(editor: Editor, text: string) {
+    if (this.settings.shortcutWiki) {
+      text = `[[${text}]]`;
+    }
     // Process template variables
     const processedText = text.replace(/{{date}}/g, new Date().toLocaleDateString());
 
@@ -185,6 +196,16 @@ class ObsidianDemoSettingTab extends PluginSettingTab {
         .setValue(this.plugin.settings.alwaysShowFileName)
         .onChange(async (value) => {
           this.plugin.settings.alwaysShowFileName = value;
+          await this.plugin.saveSettings();
+        }));
+
+    new Setting(containerEl)
+      .setName('快捷输入转双链')
+      .setDesc('将快捷输入的文本转为双链格式，如快捷文本为 `hello`，快捷输入时转换为 `[[hello]]`')
+      .addToggle(toggle => toggle
+        .setValue(this.plugin.settings.shortcutWiki)
+        .onChange(async (value) => {
+          this.plugin.settings.shortcutWiki = value;
           await this.plugin.saveSettings();
         }));
   }
@@ -386,7 +407,7 @@ class TextShortcutsView extends ItemView {
     });
 
     addButton.addEventListener('click', () => {
-      this.addShortcut();
+      this.registerShortcut();
     });
   }
 
@@ -408,11 +429,7 @@ class TextShortcutsView extends ItemView {
         : shortcut.text);
 
       textEl.addEventListener('click', () => {
-        const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
-        if (activeView) {
-          this.plugin.insertShortcutText(activeView.editor, shortcut.text);
-          new Notice('Shortcut inserted');
-        }
+        this.insertShortcut(shortcut);
       });
 
       const deleteEl = shortcutEl.createEl('div', { cls: 'text-shortcuts-delete' });
@@ -423,7 +440,7 @@ class TextShortcutsView extends ItemView {
     });
   }
 
-  private addShortcut() {
+  private registerShortcut() {
     const text = this.newShortcutTextarea.value.trim();
     if (!text) return;
 
@@ -434,6 +451,11 @@ class TextShortcutsView extends ItemView {
     this.newShortcutTextarea.value = '';
 
     new Notice('Shortcut added');
+  }
+
+  private insertShortcut(shortcut: TextShortcut) {
+    const editor = this.app.workspace.getMostRecentLeaf()?.view?.editor
+    this.plugin.insertShortcutText(editor, shortcut.text);
   }
 
   private removeShortcut(id: string) {
